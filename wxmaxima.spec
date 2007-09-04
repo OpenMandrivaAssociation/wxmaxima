@@ -1,29 +1,28 @@
 %define name	wxmaxima
-%define version 0.7.1
+%define version 0.7.3
 %define release %mkrel 1
 %define Name	wxMaxima
 
-Name:		    %{name}
-Version:	    %{version}
-Release:	    %{release}
-Summary:	    An interface for the computer algebra system Maxima
-Group:		    Sciences/Mathematics
-License:	    GPL
-Url:		    http://wxmaxima.sourceforge.net/
-Source:		    http://prdownloads.sourceforge.net/%{name}/%{Name}-%{version}.tar.bz2
-Requires:	    maxima
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Summary:	An interface for the computer algebra system Maxima
+Group:		Sciences/Mathematics
+License:	GPLv2+
+URL:		http://wxmaxima.sourceforge.net/
+Source:		http://prdownloads.sourceforge.net/%{name}/%{Name}-%{version}.tar.gz
+Requires:	maxima
 Buildrequires:	libxml2-devel
 Buildrequires:	wxgtku-devel
 Buildrequires:	ImageMagick
 Buildrequires:	desktop-file-utils
-BuildRoot:	    %{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 wxMaxima is a cross-platform graphical front-end for the computer
 algebra system Maxima based on wxWidgets. It provides nice display
 of mathematical output and easy access to Maxima functions through
-menus and dialogs.wxMaxima is a wxWidgets GUI for the computer algebra system
-Maxima
+menus and dialogs.
 
 %prep 
 %setup -q -n %{Name}-%{version}
@@ -38,22 +37,10 @@ rm -rf %{buildroot}
 %makeinstall
 %find_lang %{Name}
 # icons
-mkdir -p %{buildroot}{%{_miconsdir},%{_iconsdir},%{_liconsdir}}
-convert maxima-new.png -geometry 48x48 %{buildroot}%{_liconsdir}/%{name}.png
-convert maxima-new.png -geometry 32x32 %{buildroot}%{_iconsdir}/%{name}.png
-convert maxima-new.png -geometry 16x16 %{buildroot}%{_miconsdir}/%{name}.png
-
-# menu migration style
-mkdir -p %{buildroot}%{_menudir}
-cat > %{buildroot}%{_menudir}/%{name} <<EOF
-?package(%{name}): needs="X11" \
-    section="Sciences/Mathematics" \
-    title="wxMaxima" \
-    longtitle="An interface for the computer algebra system Maxima" \
-    command="%{_bindir}/%{name}" \
-    icon="%{name}.png" \
-    xdg="true"
-EOF
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+convert maxima-new.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+convert maxima-new.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert maxima-new.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 #xdg
 mkdir -p %{buildroot}%{_datadir}/applications
@@ -61,16 +48,25 @@ install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desk
 
 desktop-file-install --vendor="" \
     --remove-category="Application" \
+    --remove-category="Utility" \
     --add-category="GTK" \
-    --add-category="X-MandrivaLinux-MoreApplications-Sciences-Mathematics" \
+    --add-category="Education" \
+    --add-category="Science" \
+    --add-category="Math" \
+    --add-category="NumericalAnalysis" \
     --dir %{buildroot}%{_datadir}/applications \
     %{buildroot}%{_datadir}/applications/*
 
+# correct icon name in menu entry
+perl -pi -e 's,maxima-new.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+
 %post 
 %{update_menus}
+%{update_icon_cache hicolor}
 
 %postun 
 %{clean_menus}
+%{clean_icon_cache hicolor}
 
 %clean
 rm -rf %{buildroot}
@@ -80,10 +76,6 @@ rm -rf %{buildroot}
 %doc README COPYING
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_menudir}/%{name}
 %{_datadir}/%{Name}
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 
