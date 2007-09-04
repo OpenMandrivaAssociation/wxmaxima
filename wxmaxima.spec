@@ -46,6 +46,9 @@ convert maxima-new.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/
 mkdir -p %{buildroot}%{_datadir}/applications
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
+# correct icon name in menu entry
+perl -pi -e 's,maxima-new.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+
 desktop-file-install --vendor="" \
     --remove-category="Application" \
     --remove-category="Utility" \
@@ -56,9 +59,6 @@ desktop-file-install --vendor="" \
     --add-category="NumericalAnalysis" \
     --dir %{buildroot}%{_datadir}/applications \
     %{buildroot}%{_datadir}/applications/*
-
-# correct icon name in menu entry
-perl -pi -e 's,maxima-new.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 
 %post 
 %{update_menus}
