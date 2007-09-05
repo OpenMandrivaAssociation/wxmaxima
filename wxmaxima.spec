@@ -1,6 +1,6 @@
 %define name	wxmaxima
 %define version 0.7.3
-%define release %mkrel 1
+%define release %mkrel 2
 %define Name	wxMaxima
 
 Name:		%{name}
@@ -53,10 +53,8 @@ desktop-file-install --vendor="" \
     --remove-category="Application" \
     --remove-category="Utility" \
     --add-category="GTK" \
-    --add-category="Education" \
     --add-category="Science" \
     --add-category="Math" \
-    --add-category="NumericalAnalysis" \
     --dir %{buildroot}%{_datadir}/applications \
     %{buildroot}%{_datadir}/applications/*
 
