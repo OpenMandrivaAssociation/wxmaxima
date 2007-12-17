@@ -16,7 +16,6 @@ Buildrequires:	libxml2-devel
 Buildrequires:	wxgtku-devel
 Buildrequires:	ImageMagick
 Buildrequires:	desktop-file-utils
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 wxMaxima is a cross-platform graphical front-end for the computer
