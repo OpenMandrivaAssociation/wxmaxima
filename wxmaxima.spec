@@ -1,6 +1,6 @@
 %define name	wxmaxima
-%define version 0.7.3
-%define release %mkrel 2
+%define version 0.7.4
+%define release %mkrel 1
 %define Name	wxMaxima
 
 Name:		%{name}
@@ -38,16 +38,16 @@ rm -rf %{buildroot}
 %find_lang %{Name}
 # icons
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-convert maxima-new.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-convert maxima-new.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert maxima-new.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+convert wxmaxima.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+convert wxmaxima.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 #xdg
 mkdir -p %{buildroot}%{_datadir}/applications
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 # correct icon name in menu entry
-perl -pi -e 's,maxima-new.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+perl -pi -e 's,maxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 
 desktop-file-install --vendor="" \
     --remove-category="Application" \
