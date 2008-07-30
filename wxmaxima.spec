@@ -1,6 +1,6 @@
 %define name	wxmaxima
 %define version 0.7.4
-%define release %mkrel 1
+%define release %mkrel 3
 %define Name	wxMaxima
 
 Name:		%{name}
