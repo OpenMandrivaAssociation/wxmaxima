@@ -1,5 +1,5 @@
 %define name	wxmaxima
-%define version 0.7.6
+%define version 0.8.0
 %define release %mkrel 1
 %define Name	wxMaxima
 
@@ -38,9 +38,9 @@ rm -rf %{buildroot}
 %find_lang %{Name}
 # icons
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-convert wxmaxima.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-convert wxmaxima.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+convert data/wxmaxima.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+convert data/wxmaxima.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert data/wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 #xdg
 mkdir -p %{buildroot}%{_datadir}/applications
