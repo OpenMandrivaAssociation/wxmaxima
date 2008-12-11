@@ -14,7 +14,7 @@ Source:		http://prdownloads.sourceforge.net/%{name}/%{Name}-%{version}.tar.gz
 Requires:	maxima
 Buildrequires:	libxml2-devel
 Buildrequires:	wxgtku-devel
-Buildrequires:	ImageMagick
+Buildrequires:	imagemagick
 Buildrequires:	desktop-file-utils
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
