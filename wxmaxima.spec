@@ -1,5 +1,5 @@
 %define name	wxmaxima
-%define version 0.8.2
+%define version 0.8.3a
 %define release %mkrel 1
 %define Name	wxMaxima
 
@@ -52,6 +52,8 @@ perl -pi -e 's,maxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 desktop-file-install --vendor="" \
     --remove-category="Application" \
     --remove-category="Utility" \
+    --remove-category="X-Red-Hat-Base" \
+    --remove-category="X-Red-Hat-Base-Only" \
     --add-category="GTK" \
     --add-category="Science" \
     --add-category="Math" \
