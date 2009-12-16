@@ -1,5 +1,5 @@
 %define name	wxmaxima
-%define version 0.8.3a
+%define version 0.8.4
 %define release %mkrel 1
 %define Name	wxMaxima
 
