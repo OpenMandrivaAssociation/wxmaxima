@@ -1,6 +1,6 @@
 %define name	wxmaxima
 %define version 0.8.5
-%define release %mkrel 1
+%define release %mkrel 2
 %define Name	wxMaxima
 
 Name:		%{name}
@@ -47,7 +47,7 @@ mkdir -p %{buildroot}%{_datadir}/applications
 install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 # correct icon name in menu entry
-perl -pi -e 's,maxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+perl -pi -e 's,wxmaxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 
 desktop-file-install --vendor="" \
     --remove-category="Application" \
