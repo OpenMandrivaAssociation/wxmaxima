@@ -1,6 +1,6 @@
 %define name	wxmaxima
 %define version 0.8.6
-%define release %mkrel 1
+%define release %mkrel 2
 %define Name	wxMaxima
 
 Name:		%{name}
@@ -16,6 +16,11 @@ Buildrequires:	libxml2-devel
 Buildrequires:	wxgtku-devel
 Buildrequires:	imagemagick
 Buildrequires:	desktop-file-utils
+
+%if %mdkver > 201010
+Suggests:	jsmath-fonts
+%endif
+
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
