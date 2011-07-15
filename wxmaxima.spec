@@ -1,6 +1,6 @@
 %define name	wxmaxima
-%define version 0.8.6
-%define release %mkrel 2
+%define version 11.04.0
+%define release %mkrel 1
 %define Name	wxMaxima
 
 Name:		%{name}
@@ -33,7 +33,9 @@ menus and dialogs.
 %setup -q -n %{Name}-%{version}
 
 %build
-%configure2_5x
+%configure2_5x \
+	--enable-printing \
+        --enable-unicode-glyphs
 %make
 
 %install
@@ -49,10 +51,12 @@ convert data/wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/ap
 
 #xdg
 mkdir -p %{buildroot}%{_datadir}/applications
-install -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+mkdir -p %{buildroot}%{_datadir}/pixmaps
+install -D -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -D -m 644 data/wxmaxima.png %{buildroot}%{_datadir}/pixmaps/wxmaxima.png
 
 # correct icon name in menu entry
-perl -pi -e 's,wxmaxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+#perl -pi -e 's,wxmaxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 
 desktop-file-install --vendor="" \
     --remove-category="Application" \
@@ -87,4 +91,5 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{Name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_datadir}/pixmaps/%{name}.png
 
