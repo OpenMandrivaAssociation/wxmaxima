@@ -1,29 +1,26 @@
 %define name	wxmaxima
-%define version 11.08.0
+%define version 12.04.0
 %define release %mkrel 1
 %define Name	wxMaxima
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Summary:	An interface for the computer algebra system Maxima
-Group:		Sciences/Mathematics
-License:	GPLv2+
-URL:		http://wxmaxima.sourceforge.net/
-Source:		http://prdownloads.sourceforge.net/%{name}/%{Name}-%{version}.tar.gz
-Source1: %Name.desktop
-Source2: wxmaxima-ru.po.bz2
-Requires:	maxima
-Buildrequires:	libxml2-devel
-Buildrequires:	wxgtku-devel
-Buildrequires:	imagemagick
-Buildrequires:	desktop-file-utils
+Name:		      %{name}
+Version:	      %{version}
+Release:	      %{release}
+Summary:	      An interface for the computer algebra system Maxima
+Group:		      Sciences/Mathematics
+License:	      GPLv2+
+URL:		      http://wxmaxima.sourceforge.net/
+Source:		      http://prdownloads.sourceforge.net/%{name}/%{Name}-%{version}.tar.gz
+Requires:	      maxima
+BuildRequires:	      libxml2-devel
+BuildRequires:	      wxgtku-devel
+BuildRequires:	      imagemagick
+BuildRequires:	      desktop-file-utils
+BuildRoot:	      %{_tmppath}/%{name}-%{version}
 
 %if %mdkver > 201010
 Suggests:	jsmath-fonts
 %endif
-
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 wxMaxima is a cross-platform graphical front-end for the computer
@@ -33,11 +30,6 @@ menus and dialogs.
 
 %prep 
 %setup -q -n %{Name}-%{version}
-
-bzcat %SOURCE2 >locales/ru.po
-
-#build new ru locale
-msgfmt locales/ru.po -o locales/ru.mo
 
 %build
 %configure2_5x \
@@ -63,10 +55,30 @@ install -D -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.d
 install -D -m 644 data/wxmaxima.png %{buildroot}%{_datadir}/pixmaps/wxmaxima.png
 
 # correct icon name in menu entry
-#perl -pi -e 's,wxmaxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
+#perl -pi -e 's,maxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 
-# menu 
-install -D -m644 %SOURCE1 %buildroot%_desktopdir/%name.desktop
+desktop-file-install --vendor="" \
+    --remove-category="Application" \
+    --remove-category="Utility" \
+    --remove-category="X-Red-Hat-Base" \
+    --remove-category="X-Red-Hat-Base-Only" \
+    --add-category="GTK" \
+    --add-category="Science" \
+    --add-category="Math" \
+    --dir %{buildroot}%{_datadir}/applications \
+    %{buildroot}%{_datadir}/applications/*
+
+%if %mdkversion < 200900
+%post 
+%{update_menus}
+%{update_icon_cache hicolor}
+%endif
+
+%if %mdkversion < 200900
+%postun 
+%{clean_menus}
+%{clean_icon_cache hicolor}
+%endif
 
 %clean
 rm -rf %{buildroot}
@@ -79,4 +91,3 @@ rm -rf %{buildroot}
 %{_datadir}/%{Name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/pixmaps/%{name}.png
-
