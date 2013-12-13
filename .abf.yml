@@ -1,2 +1,4 @@
+removed_sources:
+  wxMaxima-12.04.0.tar.gz: f29134a212db77e3087321bc944e346e6976cb40
 sources:
-  "wxMaxima-12.04.0.tar.gz": f29134a212db77e3087321bc944e346e6976cb40
+  wxMaxima-13.04.2.tar.gz: 9508d3badb6c339f34e73e01c5065f679329a17c
