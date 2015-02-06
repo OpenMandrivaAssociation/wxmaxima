@@ -2,7 +2,7 @@
 
 Name:		      wxmaxima
 Version:	      13.04.2
-Release:	      1
+Release:	      2
 Summary:	      An interface for the computer algebra system Maxima
 Group:		      Sciences/Mathematics
 License:	      GPLv2+
