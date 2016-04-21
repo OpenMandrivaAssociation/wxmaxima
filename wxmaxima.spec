@@ -1,16 +1,16 @@
 %define Name	wxMaxima
 
 Name:		      wxmaxima
-Version:	      13.04.2
-Release:	      2
+Version:	      16.04.0
+Release:	      1
 Summary:	      An interface for the computer algebra system Maxima
 Group:		      Sciences/Mathematics
 License:	      GPLv2+
 URL:		      http://wxmaxima.sourceforge.net/
-Source:		      http://prdownloads.sourceforge.net/%{name}/%{Name}-%{version}.tar.gz
+Source:		      http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Requires:	      maxima
 BuildRequires:	      pkgconfig(libxml-2.0)
-BuildRequires:	      wxgtku-devel
+BuildRequires:	      wxgtku3.0-devel
 BuildRequires:	      imagemagick
 BuildRequires:	      desktop-file-utils
 
@@ -23,7 +23,7 @@ of mathematical output and easy access to Maxima functions through
 menus and dialogs.
 
 %prep 
-%setup -q -n %{Name}-%{version}
+%setup -q
 
 %build
 %configure2_5x \
@@ -40,15 +40,6 @@ convert data/wxmaxima.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/ap
 convert data/wxmaxima.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert data/wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
-#xdg
-mkdir -p %{buildroot}%{_datadir}/applications
-mkdir -p %{buildroot}%{_datadir}/pixmaps
-install -D -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
-install -D -m 644 data/wxmaxima.png %{buildroot}%{_datadir}/pixmaps/wxmaxima.png
-
-# correct icon name in menu entry
-#perl -pi -e 's,maxima.png,%{name},g' %{buildroot}%{_datadir}/applications/*
-
 desktop-file-install --vendor="" \
     --remove-category="Application" \
     --remove-category="Utility" \
@@ -63,9 +54,12 @@ desktop-file-install --vendor="" \
 %files -f %{Name}.lang
 %doc README COPYING
 %{_bindir}/%{name}
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/%{Name}.desktop
 %{_datadir}/%{Name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
-%{_datadir}/pixmaps/%{name}.png
-
-
+%{_datadir}/pixmaps/*
+%{_datadir}/mime/packages/*
+%{_mandir}/man1/%{name}.1.*
+%{_datadir}/info/*
+%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/bash-completion/completions/%{name}
