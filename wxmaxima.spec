@@ -1,7 +1,7 @@
 %define Name	wxMaxima
 
 Name:		      wxmaxima
-Version:	      16.04.0
+Version:	      16.04.2
 Release:	      1
 Summary:	      An interface for the computer algebra system Maxima
 Group:		      Sciences/Mathematics
