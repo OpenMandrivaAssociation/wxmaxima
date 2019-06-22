@@ -1,5 +1,5 @@
 removed_sources:
   wxmaxima-16.04.2.tar.gz: 568374973eec8110190fc8a69e4e881d9bc76e49
-sources:
   wxmaxima-19.04.3.tar.gz: 00745b3129b4d90ee9d94d70ee1b24824fd8e70e
-
+sources:
+  wxmaxima-19.05.7.tar.gz: 1053a08a1685915f513ea66a6b5bffcf557676fb

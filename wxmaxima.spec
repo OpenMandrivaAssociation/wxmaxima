@@ -1,18 +1,18 @@
 %define Name	wxMaxima
 
-Name:		      wxmaxima
-Version:	      19.04.3
-Release:	      1
-Summary:	      An interface for the computer algebra system Maxima
-Group:		      Sciences/Mathematics
-License:	      GPLv2+
-URL:		      https://wxmaxima-developers.github.io/wxmaxima/index.html
-Source:		      https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-%{version}.tar.gz
-Requires:	      maxima
-BuildRequires:	      pkgconfig(libxml-2.0)
-BuildRequires:	      wxgtku3.0-devel
-BuildRequires:	      imagemagick
-BuildRequires:	      desktop-file-utils
+Name:		wxmaxima
+Version:	19.05.7
+Release:	1
+Summary:	An interface for the computer algebra system Maxima
+Group:		Sciences/Mathematics
+License:	GPLv2+
+URL:		https://wxmaxima-developers.github.io/wxmaxima/index.html
+Source:		https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-%{version}.tar.gz
+Requires:	maxima
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	wxgtku3.0-devel
+BuildRequires:	imagemagick
+BuildRequires:	desktop-file-utils
 
 Suggests:	jsmath-fonts
 
@@ -43,7 +43,8 @@ menus and dialogs.
 %build
 %configure \
 	--enable-printing \
-        --enable-unicode-glyphs
+	--enable-unicode-glyphs \
+	%{nil}
 %make_build
 
 %install
@@ -60,12 +61,12 @@ convert data/wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/ap
 
 # .desktop
 desktop-file-install --vendor="" \
-    --remove-category="Application" \
-    --remove-category="Utility" \
-    --remove-category="X-Red-Hat-Base" \
-    --remove-category="X-Red-Hat-Base-Only" \
-    --add-category="GTK" \
-    --add-category="Science" \
-    --add-category="Math" \
-    --dir %{buildroot}%{_datadir}/applications \
-    %{buildroot}%{_datadir}/applications/*
+	--remove-category="Application" \
+	--remove-category="Utility" \
+	--remove-category="X-Red-Hat-Base" \
+	--remove-category="X-Red-Hat-Base-Only" \
+	--add-category="GTK" \
+	--add-category="Science" \
+	--add-category="Math" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{bulddroot}%{_datadir}/applications/*
