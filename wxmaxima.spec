@@ -8,13 +8,15 @@ Group:		Sciences/Mathematics
 License:	GPLv2+
 URL:		https://wxmaxima-developers.github.io/wxmaxima/index.html
 Source:		https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-%{version}.tar.gz
-Requires:	maxima
+BuildRequires:	desktop-file-utils
+BuildRequires:	doxygen
+BuildRequires:	gettext
+BuildRequires:	imagemagick
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	wxgtku3.0-devel
-BuildRequires:	imagemagick
-BuildRequires:	desktop-file-utils
 
-Suggests:	jsmath-fonts
+Requires:	maxima
+Requires:	jsmath-fonts
 
 %description
 wxMaxima is a cross-platform graphical front-end for the computer
@@ -22,42 +24,37 @@ algebra system Maxima based on wxWidgets. It provides nice display
 of mathematical output and easy access to Maxima functions through
 menus and dialogs.
 
-%files -f %{Name}.lang
+%files -f %{name}.lang
 %doc README COPYING
 %{_bindir}/%{name}
-%{_datadir}/applications/%{Name}.desktop
 %{_datadir}/%{Name}
-%{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/pixmaps/*
 %{_datadir}/mime/packages/*
+%{_datadir}/applications/%{name}.desktop
+%%{_metainfodir}/%{name}.appdata.xml
+%{_iconsdir}/hicolor/*/apps/%{name}.png
+%{bash_completionsdir}/%{name}
 %{_mandir}/man1/%{name}.1.*
-%{_datadir}/info/*
-%{_datadir}/appdata/%{name}.appdata.xml
-%{_datadir}/bash-completion/completions/%{name}
 
 #--------------------------------------------------------------------
 
 %prep
 %setup -q -n %{name}-Version-%{version}
+%autopatch -p1
 
 %build
-%configure \
-	--enable-printing \
-	--enable-unicode-glyphs \
-	%{nil}
+%cmake
 %make_build
 
 %install
-%make_install
-
-# locales
-%find_lang %{Name}
+%make_install -C build
 
 # icons
-mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-convert data/wxmaxima.png -scale 48x48 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-convert data/wxmaxima.png -scale 32x32 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert data/wxmaxima.png -scale 16x16 %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+for d in 16 32 48
+do
+	install -dm 0755  %{buildroot}%{_iconsdir}/hicolor/${d}x${d}/apps
+	convert Doxygen/wxmaxima.png -scale ${d}x${d} %{buildroot}%{_iconsdir}/hicolor/${d}x${d}/apps/%{name}.png
+done
 
 # .desktop
 desktop-file-install --vendor="" \
@@ -69,4 +66,13 @@ desktop-file-install --vendor="" \
 	--add-category="Science" \
 	--add-category="Math" \
 	--dir %{buildroot}%{_datadir}/applications \
-	%{bulddroot}%{_datadir}/applications/*
+	%{buildroot}%{_datadir}/applications/*
+
+# fix name
+mv %{buildroot}%{_datadir}/applications/io.github.wxmaxima_developers.wxMaxima.desktop \
+	%{buildroot}%{_datadir}/applications/%{name}.desktop
+mv %{buildroot}%{_metainfodir}/io.github.wxmaxima_developers.wxMaxima.appdata.xml \
+	%{buildroot}%{_metainfodir}/%{name}.appdata.xml
+
+# locales
+%find_lang %{name} --all-name
