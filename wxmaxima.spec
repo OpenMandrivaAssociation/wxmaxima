@@ -1,13 +1,13 @@
 %define Name	wxMaxima
 
 Name:		wxmaxima
-Version:	19.05.7
+Version:	20.06.6
 Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
 License:	GPLv2+
 URL:		https://wxmaxima-developers.github.io/wxmaxima/index.html
-Source:		https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-%{version}.tar.gz
+Source:		https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
 BuildRequires:	gettext
