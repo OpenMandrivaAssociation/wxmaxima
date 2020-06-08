@@ -32,9 +32,8 @@ menus and dialogs.
 %{_datadir}/pixmaps/*
 %{_datadir}/mime/packages/*
 %{_datadir}/applications/%{name}.desktop
-%%{_metainfodir}/%{name}.appdata.xml
 %{_iconsdir}/hicolor/*/apps/%{name}.png
-%{bash_completionsdir}/%{name}
+#{bash_completionsdir}/%{name}
 %{_mandir}/man1/%{name}.1.*
 
 #--------------------------------------------------------------------
