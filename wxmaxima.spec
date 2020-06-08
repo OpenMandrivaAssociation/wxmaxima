@@ -8,6 +8,7 @@ Group:		Sciences/Mathematics
 License:	GPLv2+
 URL:		https://wxmaxima-developers.github.io/wxmaxima/index.html
 Source:		https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
+BuildRequires:  cmake
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
 BuildRequires:	gettext
