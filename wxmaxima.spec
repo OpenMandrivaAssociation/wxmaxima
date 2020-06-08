@@ -28,13 +28,16 @@ menus and dialogs.
 %files -f %{name}.lang
 %doc README COPYING
 %{_bindir}/%{name}
+%{_datadir}/doc/wxmaxima/*
+%{_datadir}/bash-completion/completions/wxmaxima
 %{_datadir}/%{Name}
 %{_datadir}/pixmaps/*
 %{_datadir}/mime/packages/*
+%{_datadir}/metainfo/wxmaxima.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.png
-#{bash_completionsdir}/%{name}
 %{_mandir}/man1/%{name}.1.*
+%{_mandir}/de/man1/wxmaxima.1.zst
 
 #--------------------------------------------------------------------
 
