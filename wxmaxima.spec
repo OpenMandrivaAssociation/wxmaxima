@@ -1,20 +1,21 @@
 %define Name	wxMaxima
 
 Name:		wxmaxima
-Version:	20.06.6
+Version:	21.11.0
 Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
 License:	GPLv2+
-URL:		https://wxmaxima-developers.github.io/wxmaxima/index.html
-Source:		https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
-BuildRequires:  cmake
+URL:		https://wxmaxima-developers.github.io/%{name}/index.html
+Source:		https://github.com/wxMaxima-developers/%{name}/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
+BuildRequires:	cmake
+BuildRequires:	ninja
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
 BuildRequires:	gettext
 BuildRequires:	imagemagick
 BuildRequires:	pkgconfig(libxml-2.0)
-BuildRequires:	wxgtku3.0-devel
+BuildRequires:	wxgtku3.1-devel
 
 Requires:	maxima
 Requires:	jsmath-fonts
@@ -28,35 +29,36 @@ menus and dialogs.
 %files -f %{name}.lang
 %doc README COPYING
 %{_bindir}/%{name}
-%{_datadir}/doc/wxmaxima/*
-%{_datadir}/bash-completion/completions/wxmaxima
+%{_datadir}/doc/%{name}/*
+%{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/%{Name}
 %{_datadir}/pixmaps/*
 %{_datadir}/mime/packages/*
-%{_datadir}/metainfo/wxmaxima.appdata.xml
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/metainfo/*.appdata.xml
+%{_datadir}/applications/*.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_mandir}/man1/%{name}.1.*
-%{_mandir}/de/man1/wxmaxima.1.zst
+%{_mandir}/de/man1/%{name}.1.*
 
 #--------------------------------------------------------------------
 
 %prep
-%setup -q -n %{name}-Version-%{version}
-%autopatch -p1
+%autosetup -p1 -n %{name}-Version-%{version}
 
 %build
-%cmake
-%make_build
+%cmake \
+	-DWXM_INTERPROCEDURAL_OPTIMIZATION:BOOL=ON \
+	-G Ninja
+%ninja_build
 
 %install
-%make_install -C build
+%ninja_install -C build
 
 # icons
-for d in 16 32 48
+for d in 16 32 48 64 72 128 256
 do
-	install -dm 0755  %{buildroot}%{_iconsdir}/hicolor/${d}x${d}/apps
-	convert Doxygen/wxmaxima.png -scale ${d}x${d} %{buildroot}%{_iconsdir}/hicolor/${d}x${d}/apps/%{name}.png
+	install -dm 0755 %{buildroot}%{_iconsdir}/hicolor/${d}x${d}/apps
+	convert data/io.github.wxmaxima_developers.wxMaxima.svg -scale ${d}x${d} %{buildroot}%{_iconsdir}/hicolor/${d}x${d}/apps/%{name}.png
 done
 
 # .desktop
@@ -71,11 +73,6 @@ desktop-file-install --vendor="" \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/*
 
-# fix name
-mv %{buildroot}%{_datadir}/applications/io.github.wxmaxima_developers.wxMaxima.desktop \
-	%{buildroot}%{_datadir}/applications/%{name}.desktop
-mv %{buildroot}%{_metainfodir}/io.github.wxmaxima_developers.wxMaxima.appdata.xml \
-	%{buildroot}%{_metainfodir}/%{name}.appdata.xml
-
 # locales
 %find_lang %{name} --all-name
+
