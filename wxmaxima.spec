@@ -1,13 +1,14 @@
-%define Name	wxMaxima
+%global wxver 3.2
 
 Name:		wxmaxima
-Version:	22.09.0
+Version:	23.05.1
 Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
 License:	GPLv2+
-URL:		https://wxmaxima-developers.github.io/%{name}/index.html
-Source:		https://github.com/wxMaxima-developers/%{name}/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
+URL:		https://wxmaxima-developers.github.io/%{name}/
+#Source:		https://github.com/wxMaxima-developers/wxmaima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
+Source0:	https://github.com/wxMaxima-developers/wxmaxima/archive/refs/tags/Version-%{version}/%{name}-Version-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	ninja
 BuildRequires:	desktop-file-utils
@@ -15,7 +16,7 @@ BuildRequires:	doxygen
 BuildRequires:	gettext
 BuildRequires:	imagemagick
 BuildRequires:	pkgconfig(libxml-2.0)
-BuildRequires:	wxgtku3.1-devel
+BuildRequires:	wxgtku%{wxver}-devel
 
 Requires:	maxima
 Requires:	jsmath-fonts
@@ -27,16 +28,16 @@ of mathematical output and easy access to Maxima functions through
 menus and dialogs.
 
 %files -f %{name}.lang
-%doc README COPYING
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/doc/%{name}/*
 %{_datadir}/bash-completion/completions/%{name}
-%{_datadir}/%{Name}
+%{_datadir}/wxMaxima
 %{_datadir}/pixmaps/*
 %{_datadir}/mime/packages/*
-%{_datadir}/metainfo/*.appdata.xml
 %{_datadir}/applications/*.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_metainfodir}/*.appdata.xml
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/de/man1/%{name}.1.*
 
