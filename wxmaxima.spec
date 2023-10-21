@@ -1,14 +1,13 @@
 %global wxver 3.2
 
 Name:		wxmaxima
-Version:	23.05.1
+Version:	23.10.0
 Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
 License:	GPLv2+
 URL:		https://wxmaxima-developers.github.io/%{name}/
-#Source:		https://github.com/wxMaxima-developers/wxmaima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
-Source0:	https://github.com/wxMaxima-developers/wxmaxima/archive/refs/tags/Version-%{version}/%{name}-Version-%{version}.tar.gz
+Source0:	https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	ninja
 BuildRequires:	desktop-file-utils
