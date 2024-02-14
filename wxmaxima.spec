@@ -6,7 +6,7 @@ Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
 License:	GPLv2+
-URL:		https://wxmaxima-developers.github.io/%{name}/
+URL:		https://wxmaxima-developers.github.io/wxmaxima/
 Source0:	https://github.com/wxMaxima-developers/wxmaxima/archive/Version-%{version}/%{name}-Version-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	ninja
