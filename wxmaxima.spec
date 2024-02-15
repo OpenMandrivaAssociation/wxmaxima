@@ -36,8 +36,8 @@ menus and dialogs.
 %{_datadir}/mime/packages/*
 %{_datadir}/applications/*.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.png
-%{_iconsdir}/hicolor/*/apps/*%{name}.png
-%{_iconsdir}/hicolor/*/apps/*%{name}.svg
+%{_iconsdir}/hicolor/*/apps/*wxMaxima.png
+%{_iconsdir}/hicolor/*/apps/*wxMaxima.svg
 %{_metainfodir}/*.appdata.xml
 %{_mandir}/man1/%{name}.1.*
 %{_mandir}/de/man1/%{name}.1.*
