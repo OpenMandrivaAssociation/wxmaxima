@@ -1,7 +1,7 @@
 %global wxver 3.2
 
 Name:		wxmaxima
-Version:	24.02.2
+Version:	24.05.0
 Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
