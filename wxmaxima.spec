@@ -1,7 +1,7 @@
 %global wxver 3.2
 
 Name:		wxmaxima
-Version:	25.04.0
+Version:	26.07.1
 Release:	1
 Summary:	An interface for the computer algebra system Maxima
 Group:		Sciences/Mathematics
@@ -45,7 +45,7 @@ menus and dialogs.
 #--------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n %{name}-Version-%{version}
+%autosetup -p1 -n wxmaxima-Version-26.07.1
 
 %build
 %cmake \
